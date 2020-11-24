@@ -5,13 +5,15 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "dev":"vue-cli-service build --mode development"
+    "dev": "vue-cli-service build --mode development"
   },
   "dependencies": {
     "core-js": "^3.6.5",
     "epubjs": "^0.3.71",
     "vue": "^3.0.0",
+    "vue-lottie": "^0.2.1",
     "vue-router": "^4.0.0-0",
+    "vue-spinkit": "^1.7.12",
     "vuex": "^4.0.0-0",
     "web-storage-cache": "^1.1.1"
   },

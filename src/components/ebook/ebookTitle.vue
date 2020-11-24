@@ -1,6 +1,6 @@
 <template>
-  <transition name="slide-down">
-      <div class="title-wrapper" v-show="menuVisible">
+  <transition name="slide-down" appear>
+      <div class="title-wrapper" v-if="menuVisible">
           <div class="left">
               <span class="icon-uniE900 icon" @click="back"></span>
           </div>
@@ -39,7 +39,7 @@ export default {
         top:0;left:0;
         width: 100%;
         height: px2rem(48);
-        z-index:101;
+        z-index:201;
         background: white;
         box-shadow: 0 px2rem(8) px2rem(8) rgba(0, 0, 0, .15);
         font-size:px2rem(20);

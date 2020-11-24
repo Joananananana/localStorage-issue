@@ -63,7 +63,7 @@ export default {
         height:px2rem(90);
         box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, .15);
         background: white;
-        z-index: 101;
+        z-index: 201;
         .setting-font-size{
             flex:2;
             display: flex;
@@ -87,10 +87,10 @@ export default {
                     }
                     &:last-child{
                         .line{
-                            border-top: none;
+                            border-top: none !important;
                         }
                         .point-wrapper{
-                            border-left:none;
+                            border-left:none !important;
                         }
                     }
                     .line{

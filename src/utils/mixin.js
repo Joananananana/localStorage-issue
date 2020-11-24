@@ -1,6 +1,7 @@
 import {mapActions,mapGetters} from 'vuex'
 import { addCss } from './book'
 import { saveLocation } from '@/utils/localStorage.js'
+import { getBookmark } from './localStorage'
 export const ebookMixin = {
     computed:{
         ...mapGetters(['fileName',
@@ -60,16 +61,23 @@ export const ebookMixin = {
             }     
         },
         refreshLocation(){
-            const sectionInfo = this.currentBook.section(this.section)
-            if(sectionInfo && sectionInfo.href){
-            this.currentBook.rendition.display(sectionInfo.href).then(() => {
             const currentLocation = this.currentBook.rendition.currentLocation()
-            const startCfi = currentLocation.start.cfi
-            const progress = this.currentBook.locations.percentageFromCfi(startCfi) 
-            this.setProgress(Math.floor(progress * 100))
-            saveLocation(this.fileName,startCfi)
-                })
-             }
+            if(currentLocation && currentLocation.start){
+                const startCfi = currentLocation.start.cfi
+                const progress = this.currentBook.locations.percentageFromCfi(startCfi) 
+                this.setProgress(Math.floor(progress * 100))
+                saveLocation(this.fileName,startCfi)
+                const bookmark = getBookmark(this.fileName)
+                if(bookmark){
+                    if(bookmark.some(item => item.cfi === startCfi)){
+                        this.setIsBookmark(true)
+                    }else{
+                        this.setIsBookmark(false)
+                    }
+                }else{
+                    this.setIsBookmark(false)
+                }
+            }
         },
         display(target,cb){
             if(target){
@@ -83,7 +91,12 @@ export const ebookMixin = {
                     if(cb) cb()
                 })
             }
-        }
+        },
+        hideTitleAndMenu(){
+            this.setMenuVisible(false)
+            this.setSettingVisible(-1)
+            this.setFontFamilyVisible(false)
+        },
     }
    
 }

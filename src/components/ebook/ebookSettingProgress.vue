@@ -2,8 +2,8 @@
 <div class="setting-wrapper" v-show="menuVisible && settingVisible === 2">
   <div class="setting-progress" >
                 <div class="read-time-wrapper">
-                    <span class="read-time-text">11</span>
-                    <span class="icon-forward">></span>
+                    <span class="read-time-text">已读{{getReadTimeText()}}分钟</span>
+                    <span class="icon-forward"></span>
                 </div>
                 <div class="progress-wrapper">
                     <div class="progress-icon-wrapper" @click="prevSection()" > 
@@ -28,26 +28,33 @@
 </template>
 
 <script>
+import { getReadTime } from '../../utils/localStorage'
 import {ebookMixin} from '../../utils/mixin'
 export default {
     mixins:[ebookMixin],
     methods:{
+        getReadTimeText(){
+            return this.getReadTimeByMinute()
+        },
+        getReadTimeByMinute(){
+            const readTime = getReadTime(this.fileName)
+            if(!readTime){return 0}
+            else{ return Math.ceil(readTime / 60)}
+        },
         onProgressInput(progress){
             this.setProgress(progress).then(() => {
                 this.updateProgress()
             })
         },
-        onProgressChange(progress){
+        onProgressChange(progress) {
             this.setProgress(progress).then(() => {
-                this.displayProgress()
-            })
+            this.displayProgress()
             this.updateProgress()
-        },
+        })
+       },
         displayProgress(){
             const CFI = this.currentBook.locations.cfiFromPercentage(this.progress / 100)
-            this.currentBook.rendition.display(CFI).then(() => {
-
-            })
+            this.display(CFI)
         },
         updateProgress(){
            // console.log(this.progress)
@@ -56,20 +63,26 @@ export default {
         prevSection(){
             if(this.section >= 0 && this.bookAvailable) {
                 this.setSection(this.section - 1).then(() => {
-                    this.refreshLocation()
+                    this.displaySection()
                 })
             }
         },
         nextSection(){
             if(this.section<this.currentBook.spine.length - 1 && this.bookAvailable) {
                 this.setSection(this.section + 1).then(() => {
-                    this.refreshLocation()
+                    this.displaySection()
                 })
+            }
+        },
+        displaySection(){
+            const sectionInfo = this.currentBook.section(this.section)
+            if(sectionInfo && sectionInfo.href){
+               this.display(sectionInfo.href)
             }
         }
     },
-    beforeUpdate(){
-        this.updateProgress()
+    updated() {
+      this.updateProgress()
     }
 }
 </script>
@@ -84,7 +97,7 @@ export default {
         height:px2rem(90);
         box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, .15);
         background: white;
-        z-index: 101;
+        z-index: 201;
         .setting-progress{
             position: relative;
             width:100%;
