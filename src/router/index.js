@@ -3,7 +3,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
     path:'/',
-    redirect:'/ebook'
+    redirect:'/store'
   },
   {
     path:'/ebook',
@@ -12,6 +12,25 @@ const routes = [
       {
         path:':fileName',
         component:() => import('@/components/ebook/ebookReader.vue')
+      }
+    ]
+  },
+  {
+    path:'/store',
+    component:() => import('@/views/store/index.vue'),
+    redirect:'/store/home',
+    children:[
+      {
+        path:'home',
+        component:() => import('@/views/store/storeHome.vue')
+      },
+      {
+        path:'list',
+        component:() => import('@/views/store/StoreList.vue')
+      },
+      {
+        path:'detail',
+        component:() => import('@/views/store/StoreDetail.vue')
       }
     ]
   }

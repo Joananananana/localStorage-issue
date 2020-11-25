@@ -2,11 +2,11 @@
   <transition name="slide-down" appear>
       <div class="title-wrapper" v-if="menuVisible">
           <div class="left">
-              <span class="icon-uniE900 icon" @click="back"></span>
+              <span class="icon-qianjin icon" @click="back"></span>
           </div>
           <div class="right">
               <div class="icon-wrapper">
-                  <span class="icon-1 icon"></span>
+                  <span class="icon-2 icon"></span>
               </div>
               <div class="icon-wrapper">
                   <span class="icon-cart icon"></span>

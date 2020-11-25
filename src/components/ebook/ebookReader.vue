@@ -44,7 +44,7 @@ export default {
             if(this.mouseState === 2){
                 this.setOffsetY(0)
                 this.firstOffsetY = null
-               // this.mouseState = 3
+                this.mouseState = 3
             }else{
                 this.mouseState = 4
             }
@@ -53,7 +53,7 @@ export default {
         },
         onMaskClick(e){
             if(this.mouseState ===2 || this.mouseState ===3){
-                console.log(this.mouseState)
+               return
             }
             const offsetX = e.offsetX
             const width = window.innerWidth
@@ -111,6 +111,7 @@ export default {
                 })
             })
             this.book.loaded.metadata.then(metadata => {
+                console.log(metadata)
                 this.setMetadata(metadata)
             })
             this.book.loaded.navigation.then( nav => {
@@ -129,7 +130,9 @@ export default {
             },
         initEpub(){
             const URL =process.env.VUE_APP_RES_URL + '/epub/' + this.fileName + '.epub'
+            console.log(URL)
             this.book = new Epub(URL)
+            console.log(this.book)
             this.setCurrentBook(this.book)
             this.rendition = this.book.renderTo(('read'),{
                 width:innerWidth,
@@ -138,6 +141,7 @@ export default {
             })
             const location = getLocation(this.fileName)
             this.display(location,() => {
+                console.log('display')
                 this.initTheme()
                 this.initGlobalStyle()
             })
@@ -169,7 +173,9 @@ export default {
     },
     mounted(){
         const fileName = this.$route.params.fileName.split('|').join('/')
+        console.log(fileName)
         this.setFileName(fileName).then(() => {
+            console.log('AA')
             this.initEpub()
         })
         
