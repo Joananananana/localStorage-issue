@@ -1,9 +1,9 @@
 <template>
   <div class="flap-card-wrapper" v-show="flapCardVisible">
-      <div class="flap-card-bg" v-show="runFlapCardAnimation">
+      <div class="flap-card-bg" v-show="runFlapCardAnimation && !runBookCardAnimation">
           <animation class="animation" ></animation>
       </div>
-      <div class="close-btn-wrapper" @click="close" v-show="!runFlapCardAnimation && runBookCardAnimation" :class="{'animation':runBookCardAnimation}">
+      <div class="close-btn-wrapper" @click="close" v-show="runBookCardAnimation" :class="{'animation':runBookCardAnimation}">
           <span class="icon-close">×</span>
       </div>
       <div class="book-card" :class="{'animation':runBookCardAnimation}" v-show="runBookCardAnimation">
@@ -18,7 +18,7 @@
               </div>
               <div class="read-btn" @click.stop="showBookDetail(data)">点击阅读</div>
           </div>
-          
+
       </div>
      
   </div>
@@ -55,7 +55,6 @@ export default {
     data(){
         return {
             runBookCardAnimation:false,
-            runFlapCardAnimation:true
         }
     }
  
@@ -78,41 +77,7 @@ export default {
      .flap-card-bg{
          position: relative;
          
-     }
-     .close-btn-wrapper{
-         position: absolute;
-         left: 0;
-         top: px2rem(20);
-         z-index: 601;
-         width: 100%;
-         @include center;
-         &.animation{
-             animation: scale .3s linear;
-             @keyframes scale {
-                 0%{
-                    
-                     opacity: 0;
-                 }
-                 100%{
-                   
-                     opacity: 1;
-                 }               
-             }
-         }
-         .icon-close{
-             position: absolute;
-             top:px2rem(155);
-             left: px2rem(285);
-             width: px2rem(35);
-             height: px2rem(35);
-             font-size: px2rem(25);
-             border-radius: 50%;
-             background: #333;
-             opacity: 0.8;
-             color: white;
-             @include center;
-         }
-     }
+     }   
      .book-card{
          position: relative;
          width: 65%;
@@ -192,6 +157,40 @@ export default {
              }
          }
      }
-     
+     .close-btn-wrapper{
+         position: absolute;
+         right: px2rem(130);
+         top: 80%;
+         z-index: 601;
+         width: 100%;
+         @include center;
+         &.animation{
+             animation: scale .3s linear;
+             @keyframes scale {
+                 0%{
+                    
+                     opacity: 0;
+                 }
+                 100%{
+                   
+                     opacity: 1;
+                 }               
+             }
+             .icon-close{
+             position: absolute;
+             top:5%;
+             left: 80%;
+             width: px2rem(35);
+             height: px2rem(35);
+             font-size: px2rem(25);
+             border-radius: 50%;
+             background: #333;
+             opacity: 0.8;
+             color: white;
+             @include center;
+         }
+         }
+        
+     }
  }
 </style>

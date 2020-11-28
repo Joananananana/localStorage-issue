@@ -18,8 +18,12 @@ const routes = [
   {
     path:'/store',
     component:() => import('@/views/store/index.vue'),
-    redirect:'/store/home',
+    redirect:'/store/shelf',
     children:[
+      {
+        path:'/shelf',
+        component:() => import('@/views/store/storeShelf.vue')
+      },
       {
         path:'home',
         component:() => import('@/views/store/storeHome.vue')

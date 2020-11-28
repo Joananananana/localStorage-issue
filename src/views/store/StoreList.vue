@@ -38,9 +38,11 @@
       },
       totalNumber() {
         let num = 0
-        Object.keys(this.list).forEach(key => {
+        if(this.list){
+          Object.keys(this.list).forEach(key => {   
           num += this.list[key].length
         })
+        }
         return num
       }
     },

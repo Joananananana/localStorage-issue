@@ -21,6 +21,7 @@
               <input type="text" class="input" placeholder="别为小事抓狂"
               v-model="searchText" 
               @click="showHotSearch"
+              @keyup.enter.exact="search"
               >
           </div>
       </div>
@@ -93,16 +94,29 @@ export default {
             })
         },
         back(){
-            this.hideHotSearch()
             if(this.offsetY > 0){
                 this.showShadow()
             }else{
                 this.hideShadow()
             }
+            if(this.hotSearchVisible){
+                this.hideHotSearch()
+            }else{
+                this.$router.push('/store/shelf')
+            }
         },
         showFlapCard(){
             this.setFlapCardVisible(true)
             this.FlapCard() 
+            this.setRunFlapCardAnimation(true)
+        },
+        search(){
+            this.$router.push({
+                path:'/store/list',
+                query:{
+                    keyword:this.searchText
+                }
+            })
         }
     },
     props:{

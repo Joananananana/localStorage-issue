@@ -72,7 +72,7 @@ export default {
         home().then(Response =>{
            if(Response && Response.status === 200){
                const data = Response.data
-               console.log(data)
+                         
                const randomIndex = Math.floor( Math.random() * data.random.length )
                this.random = data.random[randomIndex]
                this.banner = process.env.VUE_APP_RES_URL + '/img.jpg'

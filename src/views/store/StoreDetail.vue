@@ -79,9 +79,11 @@
   import Scroll from '../../components/common/Scroll'
   import Toast from '../../components/common/Toast'
   import { detail } from '../../api/store'
+  import {storeHomeMixin} from '../../utils/mixin'
   import { px2rem, realPx } from '../../utils/utils'
   import Epub from 'epubjs'
   export default {
+    mixins:[storeHomeMixin],
     components: {
       DetailTitle,
       Scroll,
@@ -217,6 +219,7 @@
           detail({
             fileName: this.fileName
           }).then(response => {
+            console.log(response)
             if (response.status === 200 && response.data.error_code === 0 && response.data.data) {
               const data = response.data.data
               this.bookItem = data
@@ -234,6 +237,8 @@
         }
       },
       back() {
+        this.setRunFlapCardAnimation(false)
+        this.setFlapCardVisible(false)
         this.$router.go(-1)
       },
       display(location) {

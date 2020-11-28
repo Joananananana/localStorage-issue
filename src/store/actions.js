@@ -79,6 +79,9 @@ const actions = {
       },
       setCurrentType({ commit }, type) {
         return commit('SET_CURRENT_TYPE', type)
+      },
+      setRunFlapCardAnimation({ commit },bool){
+        return commit('SET_RUN_FLAP_CARD_ANIMATION',bool)
       }
 }
 export default actions

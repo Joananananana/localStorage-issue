@@ -105,21 +105,23 @@ export const storeHomeMixin = {
       ...mapGetters([
         'offsetY',
         'hotSearchOffsetY',
-        'flapCardVisible'
+        'flapCardVisible',
+        'runFlapCardAnimation'
       ])
     },
     methods: {
       ...mapActions([
         'setOffsetY',
         'setHotSearchOffsetY',
-        'setFlapCardVisible'
+        'setFlapCardVisible',
+        'setRunFlapCardAnimation'
       ]),
       showBookDetail(book) {
         this.$router.push({
             path:'/store/detail',
             query:{
                 fileName:book.fileName,
-                category:book.category
+                category:book.categoryText
             }
         })
       }

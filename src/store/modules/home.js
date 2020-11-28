@@ -1,7 +1,8 @@
 const store = {
     state:{
         hotSearchOffsetY:0,
-        flapCardVisible:false
+        flapCardVisible:false,
+        runFlapCardAnimation:true
     },
     mutations:{
         SET_HOT_SEARCH_OFFSETY(state,offsetY){
@@ -9,6 +10,9 @@ const store = {
         },
         SET_FLAP_CARD_VISIBLE(state,visible){
             state.flapCardVisible = visible
+        },
+        SET_RUN_FLAP_CARD_ANIMATION(state,bool){
+            state.runFlapCardAnimation = bool
         }
     }
 }

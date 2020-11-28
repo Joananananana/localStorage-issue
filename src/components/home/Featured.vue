@@ -8,9 +8,8 @@
             <img class="img" :src="item.cover">
           </div>
           <div class="content-wrapper">
-            <div class="title title-small" ref="title">{{item.title}}</div>
-            <div class="author sub-title-tiny" ref="author">{{item.author}}</div>
-            <div class="category third-title-tiny" ref="category">{{categoryText(item.category)}}</div>
+            <div class="title" ref="title">{{item.title}}</div>
+            <div class="author" ref="author">{{item.author}}</div>
           </div>
         </div>
       </div>
@@ -83,14 +82,15 @@
         justify-content: flex-start;
         align-items: flex-start;
         .featured-item {
-          flex: 0 0 50%;
-          width: 50%;
-          padding: px2rem(5) 0;
+          flex: 0 0 100%;
+          width: 100%;
+          padding: px2rem(15) 0 0 ;
           @include top;
           .img-wrapper {
             flex: 0 0 30%;
             width: 30%;
             .img {
+              border-radius: px2rem(8);
               width: 100%;
               // width: px2rem(50);
               // height: px2rem(75);
@@ -99,13 +99,16 @@
           .content-wrapper {
             flex: 1;
             width: px2rem(117.5);
-            padding: 0 px2rem(5);
+            padding: 0 px2rem(5) 0  px2rem(10);
             box-sizing: border-box;
-            .author {
-              margin-top: px2rem(15);
+
+            .title{
+              font-size: px2rem(15);
+              margin-top: px2rem(10);
             }
-            .category {
-              margin-top: px2rem(5);
+            .author {
+              font-size: px2rem(15);
+              margin-top: px2rem(30);
             }
           }
         }

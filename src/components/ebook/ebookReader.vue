@@ -111,7 +111,6 @@ export default {
                 })
             })
             this.book.loaded.metadata.then(metadata => {
-                console.log(metadata)
                 this.setMetadata(metadata)
             })
             this.book.loaded.navigation.then( nav => {
@@ -120,7 +119,7 @@ export default {
                 if(!item.parent){
                     return level
                 }else{
-                    return find(navigation.filter(parentItem => parentItem.id === item.parent)[0],++level)
+                    return find(navIten.filter(parentItem => parentItem.id === item.parent)[0],++level)
                 }
                 }
                 navIten.forEach(item => {item.level = find(item)
@@ -130,9 +129,7 @@ export default {
             },
         initEpub(){
             const URL =process.env.VUE_APP_RES_URL + '/epub/' + this.fileName + '.epub'
-            console.log(URL)
             this.book = new Epub(URL)
-            console.log(this.book)
             this.setCurrentBook(this.book)
             this.rendition = this.book.renderTo(('read'),{
                 width:innerWidth,
@@ -141,7 +138,6 @@ export default {
             })
             const location = getLocation(this.fileName)
             this.display(location,() => {
-                console.log('display')
                 this.initTheme()
                 this.initGlobalStyle()
             })
@@ -173,9 +169,7 @@ export default {
     },
     mounted(){
         const fileName = this.$route.params.fileName.split('|').join('/')
-        console.log(fileName)
         this.setFileName(fileName).then(() => {
-            console.log('AA')
             this.initEpub()
         })
         
