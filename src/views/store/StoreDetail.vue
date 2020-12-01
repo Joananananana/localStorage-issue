@@ -78,7 +78,7 @@
   import BookInfo from '../../components/detail/BookInfo'
   import Scroll from '../../components/common/Scroll'
   import Toast from '../../components/common/Toast'
-  import { detail } from '../../api/store'
+  import {flatList } from '../../api/store'
   import {storeHomeMixin} from '../../utils/mixin'
   import { px2rem, realPx } from '../../utils/utils'
   import Epub from 'epubjs'
@@ -214,14 +214,16 @@
       },
       init() {
         this.fileName = this.$route.query.fileName
+        console.log(this.fileName)
         this.categoryText = this.$route.query.category
         if (this.fileName) {
-          detail({
+          flatList({
             fileName: this.fileName
           }).then(response => {
-            console.log(response)
-            if (response.status === 200 && response.data.error_code === 0 && response.data.data) {
-              const data = response.data.data
+            
+            if (response) {
+              console.log(response)
+              const data = response.data
               this.bookItem = data
               this.cover = this.bookItem.cover
               let rootFile = data.rootFile

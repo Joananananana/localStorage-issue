@@ -11,6 +11,7 @@
 <script>
 /**类似弹窗的组件**/
   export default {
+    name:'Toast',
     props: {
       text: [String, Number],
       timeout: {

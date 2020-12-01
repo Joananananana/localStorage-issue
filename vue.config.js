@@ -14,7 +14,7 @@ module.exports = {
             mock(app,'/book/home',homeData)
             mock(app,'/book/shelf',shelfData)
             mock(app,'/book/list',listData)
-            mock(app,'/book/flat-list',flatListData)
+            mock(app,'/book/flatList',flatListData)
         }
     }
 }
